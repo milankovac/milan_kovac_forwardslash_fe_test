@@ -183,14 +183,15 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function post_type_real_estate()
 {
    $labels=array(
-	   'name'=>__('Real estate'),
-	   'singular_name'=>__('Real estate')
+	   'name'                 =>__('Real estate'),
+	   'singular_name'        =>__('Real estate')
    );
    $args=array(
 		'labels'=>$labels,
 		'taxonomies'          => array( 'location' ),
 		'hierarchical'        => false,
 		'public'              => true,
+		'rewrite'             => array( 'slug' => 'estate' ),
    );
    register_post_type('real_estate', $args );
 }
@@ -202,13 +203,15 @@ function taxonomy_location()
 {
 
 	$args=array(
-		'hierarchical' => false,  
-		'label'=>'Location'
+		'hierarchical'      => false,  
+		'label'             =>'Location',
+		'rewrite'           => array( 'slug' => 'location' ),
+		
 	);
 	register_taxonomy( 'location', 'real_estate', $args );
 }
 add_action('init','taxonomy_location');
-
+// End Taxonomy Location
 
 //Taxonomy Type
 
@@ -216,46 +219,50 @@ function taxonomy_type()
 {
 
 	$args=array(
-		'hierarchical' => false,  
-		'label'=>'Type'
+		'hierarchical'      => false,  
+		'label'             =>'Type',
+		'rewrite'           => array( 'slug' => 'type' ),
 	);
 	register_taxonomy( 'type', 'real_estate', $args );
 }
 add_action('init','taxonomy_type');
+// End Taxonomy Type
+
 
 //ACF FIELDS PHP
 
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
-		'key' => 'group_1',
-		'title' => 'Group 1',
-		'fields' => array (),
-		'location' => array (
+		'key'                   => 'group_1',
+		'title'                 => 'Group 1',
+		'fields'                => array (),
+		'location'              => array (
 			array (
 				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'real_estate',
+					'param'     => 'post_type',
+					'operator'  => '==',
+					'value'     => 'real_estate',
 				),
 			),
 		),
 	));
 	
 	acf_add_local_field(array(
-		'key' => 'field_1',
-		'label' => 'Title',
-		'name' => 'title',
-		'type' => 'text',
-		'parent' => 'group_1'
+		'key'          => 'field_1',
+		'label'        => 'Title',
+		'name'         => 'title',
+		'type'         => 'text',
+		'parent'       => 'group_1'
 	));
 	acf_add_local_field(array(
-		'key' => 'field_2',
-		'label' => 'Image',
-		'name' => 'image',
-		'type' => 'image',
-		'parent' => 'group_1'
+		'key'         => 'field_2',
+		'label'       => 'Image',
+		'name'        => 'image',
+		'type'        => 'image',
+		'parent'      => 'group_1'
 	));
 	
-	endif;
+endif;
+//End ACF FIELDS PHP
 
