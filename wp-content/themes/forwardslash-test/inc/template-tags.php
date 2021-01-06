@@ -63,7 +63,7 @@ if ( ! function_exists( 'forwardslash_test_entry_footer' ) ) :
 			$categories_list = get_the_category_list( esc_html__( ', ', 'forwardslash-test' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'forwardslash-test' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'forwardslash-test' ) . '</span><br>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			/* translators: used between list items, there is a space after the comma */
@@ -128,7 +128,7 @@ if ( ! function_exists( 'forwardslash_test_post_thumbnail' ) ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?php the_post_thumbnail('medium'); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
@@ -136,7 +136,7 @@ if ( ! function_exists( 'forwardslash_test_post_thumbnail' ) ) :
 			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
 					the_post_thumbnail(
-						'post-thumbnail',
+						'medium',
 						array(
 							'alt' => the_title_attribute(
 								array(
