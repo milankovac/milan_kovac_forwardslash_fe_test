@@ -58,7 +58,7 @@ if ( ! function_exists( 'forwardslash_test_entry_footer' ) ) :
 	 */
 	function forwardslash_test_entry_footer() {
 		// Hide category and tag text for pages.
-		if ( 'post' === get_post_type() ) {
+		if ( 'post' === get_post_type()||'real_estate'===get_post_type()) {
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'forwardslash-test' ) );
 			if ( $categories_list ) {
@@ -74,7 +74,7 @@ if ( ! function_exists( 'forwardslash_test_entry_footer' ) ) :
 			}
 		}
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() )||'real_estate'===get_post_type() ) {
 			echo '<span class="comments-link">';
 			comments_popup_link(
 				sprintf(

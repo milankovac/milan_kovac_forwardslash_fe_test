@@ -75,6 +75,7 @@ body
 	margin: auto;
 	padding: 80px;
 	color: white;
+	box-shadow: 0 0 50px #000000;
 }
 .entry-title
 {  
@@ -151,3 +152,33 @@ padding: 10px;
 	padding: 8px;
 	border-radius: 5px;
 }
+.form-update{
+	width: 30%;
+	margin: auto;
+	background-color: #3F3F3F;
+	padding: 50px;
+	margin-top:50px ;
+	margin-bottom: 50px;
+	box-shadow: 0 0 50px #000000;
+}
+.form-update label
+{
+	color: white;
+}
+.form-update .acf-button
+{
+	background-color:#ed8a63;
+	padding: 6px;
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+.btn
+{
+	background-color:#3a4660;
+	color: white;
+}
+@media only screen and (max-width: 600px) {
+	.posts,.comments-area{width: 100%;}
+	#comment{width: 70%;}
+  }

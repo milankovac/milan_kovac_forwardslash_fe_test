@@ -16,19 +16,13 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
-	<?php
-		$custom_query = new WP_Query( 
-			array(
-				'post_type'=>array('post', 'real_estate') 
-			
-			) 
-		);
-	?>
+
 		<?php
-		if ( $custom_query->have_posts() ) :
+		if (have_posts()) :
 	
 			/* Start the Loop */
-			while ( $custom_query->have_posts() ) : $custom_query->the_post();
+			while (have_posts()): 
+			the_post();
 		
 			
 

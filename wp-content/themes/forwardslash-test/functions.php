@@ -192,6 +192,8 @@ function post_type_real_estate()
 		'hierarchical'        => false,
 		'public'              => true,
 		'rewrite'             => array( 'slug' => 'estate' ),
+		'supports'            => array( 'title', 'editor', 'comments', 'post-templates'),
+		
    );
    register_post_type('real_estate', $args );
 }
@@ -206,6 +208,7 @@ function taxonomy_location()
 		'hierarchical'      => false,  
 		'label'             =>'Location',
 		'rewrite'           => array( 'slug' => 'location' ),
+		
 		
 	);
 	register_taxonomy( 'location', 'real_estate', $args );
@@ -250,8 +253,8 @@ if( function_exists('acf_add_local_field_group') ):
 	
 	acf_add_local_field(array(
 		'key'          => 'field_1',
-		'label'        => 'Title',
-		'name'         => 'title',
+		'label'        => 'Subtitle',
+		'name'         => 'subtitle',
 		'type'         => 'text',
 		'parent'       => 'group_1'
 	));
@@ -260,9 +263,18 @@ if( function_exists('acf_add_local_field_group') ):
 		'label'       => 'Image',
 		'name'        => 'image',
 		'type'        => 'image',
-		'parent'      => 'group_1'
+		'parent'      => 'group_1',
+		
 	));
 	
 endif;
 //End ACF FIELDS PHP
 
+//SEARCH ONLY REAL ESTATE POST
+function wpb_search_filter($query) {
+	if ($query->is_search) {
+	$query->set('post_type','real_estate');
+	}
+	return $query;
+	}
+add_filter('pre_get_posts','wpb_search_filter');
