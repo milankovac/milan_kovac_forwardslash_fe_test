@@ -31,20 +31,21 @@ get_header();
          ?>
          <div class="form-update">
          <?php
-         $nonce=wp_create_nonce('user-submit');
+             $nonce_field=wp_nonce_field();
             acf_form(array(
                 'id'              =>  'acf-form',
                 'post_id'		  => $post->ID,
                 'post_title'	  => true,
-                 'fields'         =>array('subtitle'),
+				'fields'          =>array('subtitle'),
+				'html_after_fields' =>$nonce_field,
                  
                 
                 
             ));
         endif;
-       
-            ?>
-            
+	
+        ?>
+
         </div>
 
         <?php
@@ -61,5 +62,11 @@ get_header();
 	</main><!-- #main -->
 
 <?php
+//Check Nonce
+  if(!isset($_POST['_wpnonce'])||!wp_verify_nonce($_POST['_wpnonce']))
+  {
+	die('Erorr');
+  };
+
 get_sidebar();
 get_footer();

@@ -187,8 +187,7 @@ function post_type_real_estate()
 	   'singular_name'        =>__('Real estate')
    );
    $args=array(
-		'labels'=>$labels,
-		'taxonomies'          => array( 'location' ),
+		'labels'              =>$labels,
 		'hierarchical'        => false,
 		'public'              => true,
 		'rewrite'             => array( 'slug' => 'estate' ),
@@ -278,3 +277,6 @@ function wpb_search_filter($query) {
 	return $query;
 	}
 add_filter('pre_get_posts','wpb_search_filter');
+
+
+
