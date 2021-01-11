@@ -27,7 +27,7 @@ get_header();
         if( current_user_can( 'edit_post', $post->ID )|| current_user_can('administrator')):
          ?>
          <div class="form-update">
-		 <form method="post" >
+		 <form method="post" action="<?php echo  get_permalink($page_id); ?>">
 			<label>Title:</label><br>
 			<input  class='form-control' type="text" name="title" value="<?php echo $post->post_title?>">
 			<br>
