@@ -279,4 +279,3 @@ function wpb_search_filter($query) {
 add_filter('pre_get_posts','wpb_search_filter');
 
 
-

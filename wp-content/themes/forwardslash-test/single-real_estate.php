@@ -9,10 +9,7 @@
 acf_form_head();
 get_header();
 
-
 ?>
-
-
 	<main id="primary" class="site-main">
 
 		<?php
@@ -30,18 +27,18 @@ get_header();
         if( current_user_can( 'edit_post', $post->ID )|| current_user_can('administrator')):
          ?>
          <div class="form-update">
-         <?php
-             $nonce_field=wp_nonce_field();
-            acf_form(array(
-                'id'              =>  'acf-form',
-                'post_id'		  => $post->ID,
-                'post_title'	  => true,
-				'fields'          =>array('subtitle'),
-				'html_after_fields' =>$nonce_field,
-                 
-                
-                
-            ));
+		 <form method="post" >
+			<label>Title:</label><br>
+			<input  class='form-control' type="text" name="title" value="<?php echo $post->post_title?>">
+			<br>
+		    <label>Subtitle:</label><br>
+			<input class='form-control' type="text" name="subtitle" value="<?php the_field('subtitle'); ?>">
+			<br><br>
+			<?php wp_nonce_field()?>
+			<input type="submit" value="Submit" name='submit-edit-post' class='btnUpdate'>
+		</form> 
+
+        <?php
         endif;
 	
         ?>
@@ -62,11 +59,24 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-//Check Nonce
-  if(!isset($_POST['_wpnonce'])||!wp_verify_nonce($_POST['_wpnonce']))
-  {
-	die('Erorr');
-  };
-
+	if(isset($_POST['submit-edit-post']))
+	{
+		$title=$_POST['title'];
+		$subtile=$_POST['subtitle'];
+		
+		$date=array(
+			'ID'=>$post->ID,
+			'post_title'=>$title,
+		);
+		wp_update_post( $date );
+		update_field('subtitle', $subtile, $post->ID);
+		echo "<meta http-equiv='refresh' content='0'>";
+		
+	}
+	if(!isset($_POST['_wpnonce'])||!wp_verify_nonce($_POST['_wpnonce']))
+	{
+		die('Error');
+	}
 get_sidebar();
 get_footer();
+?>
